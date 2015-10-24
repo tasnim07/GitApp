@@ -1,0 +1,58 @@
+.body {
+	background-color: #00c5ff;
+}
+
+#header {
+	color: #62514f;
+	font-family: Courier;
+	margin: auto;
+	text-align: center;
+}
+
+h4 {
+	color: #62514f;
+	font-family: sans-serif;
+	text-align: center;
+}
+
+.submit_button {
+	height: 40px;
+	width: 310px;
+	border: 2px solid #000000;
+	border-radius: 5px;
+	margin: 5px 2000px 0px 500px;	
+	background-color: #c7d2e9;
+	font-family: Verdana;
+	font-size: 20px;
+	color: #000000;
+}
+
+.username {
+	height: 40px;
+	width: 300px;
+	border: 2px solid #000000;
+	border-radius: 5px;
+	margin: 20px 2000px 0px 500px;
+	font-size: 15px;
+}
+
+
+div {
+	height: 45px;
+	width: 305px;
+	border: 2px solid #000000;
+	border-radius: 5px;
+	margin: 20px 2000px 0px 500px;
+	text-align: center;
+	background-color: #6991ac;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+	font-family: Arial;
+}
+
+span {
+	font-size: 20px;
+}
