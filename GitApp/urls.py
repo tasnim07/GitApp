@@ -16,10 +16,14 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from rest_framework import routers
+from django.contrib.auth import views as auth_views
 
 router = routers.DefaultRouter()
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^app/', include('app.urls')),
+    url(r'', include('social_auth.urls')),
+    url(r'^login/$', auth_views.login, {'template_name': 'app/login.html'}, name="login"),
+    url(r'^logout/$', auth_views.logout, {'template_name': 'app/logout.html'}, name='logout'),
 ]

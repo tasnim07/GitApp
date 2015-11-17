@@ -1,2 +1,5 @@
+*.pyc
 client_id.txt
 db.sqlite3
+local_settings.py
+venv

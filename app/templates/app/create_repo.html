@@ -1,0 +1,9 @@
+<h1>Create a new repository on github</h1>
+<form action="{% url 'create-repo' %}" method="POST">
+{% csrf_token %}
+<label>Name</label>
+<input type="text" name="name">
+<label>Description</label>
+<textarea  name="body" ></textarea>
+<input type="submit" value="save">
+</form>
