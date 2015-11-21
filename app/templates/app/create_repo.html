@@ -1,9 +1,13 @@
 <h1>Create a new repository on github</h1>
 <form action="{% url 'create-repo' %}" method="POST">
 {% csrf_token %}
-<label>Name</label>
-<input type="text" name="name">
-<label>Description</label>
-<textarea  name="body" ></textarea>
-<input type="submit" value="save">
+<div>
+	<label for="name">Name</label>
+	<input type="text" name="{{ repo_name }}" value="">
+</div>
+<div>
+	<label for="name">Description</label>
+	<textarea  name="body" ></textarea>
+</div>
+ <input type="submit" value="Save" />
 </form>

@@ -68,14 +68,6 @@ def github_callback(request):
 	data = r.json()
 	access_token = data['access_token']
 	
-	"""
-	g_user = Github(login_or_token=access_token).get_user()
-	user = GitHubUser.objects.create(user=g_user.login, access_token=access_token)
-	user = authenticate(login=user.login)
-	login(request, user)
-	"""
-	#github_instance = Github(login_or_token=access_token).get_user()
-	
 	try:
 		github_user = GitHubUser.objects.get(access_token=access_token)
 		user = github_user.user
@@ -112,13 +104,21 @@ def logout_view(request):
 
 @login_required
 def create_repo(request):
-	#import pdb; pdb.set_trace()
+	if request.method == 'GET':
+		return render(request, 'app/create_repo.html')
+	import pdb; pdb.set_trace()
 	user = request.user
-	github_user = GitHubUser.objects.get(user=user)
-	access_token = github_user.access_token
+	try:
+		repo_name = 'repo_name' in request.POST
+	except:
+		repo_name = 'repo_name' in request.POST and request.POST.get('repo_name')
+	try:
+		description = 'description' in request.POST
+	except:
+		description = 'description' in request.POST and request.POST.get('description')
+	access_token = GitHubUser.objects.get(user=user).access_token
 	github_user = Github(login_or_token=access_token).get_user()
-	new_repo = Create_repo.objects.create(name=request.POST['name'], description=request.POST['description'])
-	new_repo = github_user.create_repo(name=new_repo.name, description=new_repo.description)
+	new_repo = github_user.create_repo(repo_name, description=description)
 	return render(request, 'app/create_repo.html')
 
 def profile(request):
