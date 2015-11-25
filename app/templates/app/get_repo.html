@@ -1,6 +1,8 @@
 {% extends "app/base.html" %}
+{% block title %}Github App | Repo{% endblock %}
 {% block content %}
 
+<!--Some css styling-->
 <style>
 	.button {
 		border-radius: 5px;
@@ -26,7 +28,15 @@
 		margin-bottom: 20px;
 		color: #bdbcbc;
 	}
+
+	.search {
+		margin-top: 20px;
+		margin-left: 10px;
+		max-width: 200px;
+	}
 </style>
+
+<!--for listing the repositories -->
 <div class="list_view">
 <h2 id="header">Repositories</h2>
 {% for key in data %}
@@ -35,5 +45,17 @@
 </ul>
 {% endfor %}
 </div>
-<a href="{% url 'create-repo' %}" class="button">Create a new Repo</a>
+
+<!--Form for a search box -->
+<form action="{% url 'search-repo' %}" method="POST" class="search">
+{% csrf_token %}
+<div class="ul_form">
+	<div class="form-group">
+		<label for="name"></label>
+		<input id="title" type="text" placeholder="search" name="q" value="{{ q }}" class="form-control">
+	</div>
+<button type="submit" class="btn btn-default">Search</button>
+
+<!--A link for a creating a new Repositories-->
+<a href="{% url 'create-repo' %}" class="button">+ New Repository</a>
 {% endblock %}

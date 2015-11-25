@@ -31,7 +31,7 @@ def get_token(request):
 	request.session['github_auth_state'] = state
 	params = {
 		'client_id': GITHUB_API_ID,
-		'scope': 'user:email, repo, name',
+		'scope': 'user:email, repo, name, delete_repo',
 		'state': state
 	}
 	github_auth_url = 'https://github.com/login/oauth/authorize'
@@ -118,6 +118,16 @@ def create_repo(request):
 	github_user = Github(login_or_token=access_token).get_user()
 	new_repo = github_user.create_repo(repo_name, description=description)
 	return redirect(reverse('get-repo'))
+
+def search_repo(request):
+	#import pdb;pdb.set_trace()
+	q = request.POST.get('q')
+	params = {
+		'q': q,
+		'order': 'asc',
+	}
+	req = requests.get('https://api.github.com/search/repositories', params=params)
+	return HttpResponse(req.content)
 
 def profile(request):
 	parsedData = []
