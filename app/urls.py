@@ -10,5 +10,5 @@ urlpatterns = [
     url('^profile/repo/$',views.get_token, name='repo'),
     url(r'^github-callback/$', views.github_callback, name='github-callback'),
    	url(r'^get-repo/$', views.show_repository, name='get-repo'),
-   	url(r'^create-repo/$', views.create_repo, name='create-repo'),
+   	url(r'^create-repo/$', views.create_repo,  name='create-repo'),
 ]

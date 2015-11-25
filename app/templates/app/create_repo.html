@@ -1,13 +1,26 @@
-<h1>Create a new repository on github</h1>
-<form action="{% url 'create-repo' %}" method="POST">
+{% extends "app/base.html" %}
+{% block content %}
+
+<h1 style="margin: 15px">Create a new repository on github</h1>
+<style>
+  .form-signin {
+    max-width: 600px;
+    padding: 15px;
+    margin: 10px;
+  }    
+</style>
+<form action="{% url 'create-repo' %}" method="POST" class="form-signin">
 {% csrf_token %}
-<div>
-	<label for="name">Name</label>
-	<input type="text" name="{{ repo_name }}" value="">
+<div class="ul_form">
+	<div class="form-group">
+		<label for="name">Name</label>
+		<input id="title" type="text" name="repo_name" value="{{ repo_name }}" class="form-control">
+	</div>
+	<div class="form-group">
+		<label for="name">Description</label>
+		<textarea id="body" name="description" value="{{ description }}" class="form-control" rows="10"></textarea>
+	</div>
+<button id="save_post" type="submit" class="btn btn-primary btn-lg">Save</button>
 </div>
-<div>
-	<label for="name">Description</label>
-	<textarea  name="body" ></textarea>
-</div>
- <input type="submit" value="Save" />
 </form>
+{% endblock %}

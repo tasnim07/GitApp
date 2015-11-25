@@ -1,0 +1,38 @@
+{% extends "app/base.html" %}
+{% block content %}
+
+<style>
+	.button {
+		border-radius: 5px;
+		border: 2px solid #e0e0e0;
+		background-color: #aef279;
+		height: 40px;
+		width: 200px;
+		margin-top: 100px;
+		margin-left: 1050px;
+		text-align: center;
+		display: inline-block;
+		font-family: verdana;
+		color: white;
+		font-size: 18px;
+		clear: both;
+	}
+	.list_view {
+		margin-top: 30px;
+	}
+
+	#header {
+		margin-left: 20px;
+		margin-bottom: 20px;
+	}
+</style>
+<div class="list_view">
+<h2 id="header"> Repositories</h2>
+{% for key in data %}
+<ul>
+	{{ key }}
+</ul>
+{% endfor %}
+</div>
+<a href="{% url 'create-repo' %}" class="button">Create a new Repo</a>
+{% endblock %}

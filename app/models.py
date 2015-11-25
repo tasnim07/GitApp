@@ -12,9 +12,3 @@ class GitHubUser(models.Model):
 	def __str__(self):
 		return self.user.email
 
-class Create_repo(models.Model):
-	name = models.CharField(max_length=30)
-	description = models.CharField(max_length=1000)
-
-	def __str__(self):
-		return self.name

@@ -9,7 +9,7 @@ from github import Github
 from requests import Request
 
 # Application imports
-from .models import GitHubUser, Create_repo
+from .models import GitHubUser
 from GitApp.settings import GITHUB_API_ID,\
     GITHUB_API_SECRET
 
@@ -96,7 +96,9 @@ def show_repository(request):
 	for repo in github_user.get_repos():
 		print repo.name
 		repos.append(repo.name)
-	return HttpResponse(json.dumps({'repos': repos}))
+
+	#return HttpResponse(json.dumps({'repos': repos}))
+	return render(request, 'app/get_repo.html', {'data': repos})
 
 def logout_view(request):
 	logout(request)
@@ -106,20 +108,16 @@ def logout_view(request):
 def create_repo(request):
 	if request.method == 'GET':
 		return render(request, 'app/create_repo.html')
-	import pdb; pdb.set_trace()
+
 	user = request.user
-	try:
-		repo_name = 'repo_name' in request.POST
-	except:
-		repo_name = 'repo_name' in request.POST and request.POST.get('repo_name')
-	try:
-		description = 'description' in request.POST
-	except:
-		description = 'description' in request.POST and request.POST.get('description')
+	
+	repo_name = request.POST.get('repo_name')
+	description = request.POST.get('description')
+	
 	access_token = GitHubUser.objects.get(user=user).access_token
 	github_user = Github(login_or_token=access_token).get_user()
 	new_repo = github_user.create_repo(repo_name, description=description)
-	return render(request, 'app/create_repo.html')
+	return redirect(reverse('get-repo'))
 
 def profile(request):
 	parsedData = []
